@@ -1,0 +1,39 @@
+[project]
+name = "chmurl"
+version = "0.1.0"
+description = "Simple URL shortener ☁️"
+readme = "README.md"
+authors = [
+    { name = "aszc-dev", email = "hi@aszc.dev" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "djangorestframework>=3.18.1",
+    "pybase62>=1.0.0",
+]
+
+[project.scripts]
+chmurl = "chmurl:main"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "chmurl.settings"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+extend-exclude = [
+    "migrations"
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "django-stubs>=6.1.0",
+    "djangorestframework-stubs>=3.18.1",
+    "mypy>=2.3.1",
+    "pytest-django>=4.14.0",
+    "ruff>=0.16.7",
+]
