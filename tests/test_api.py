@@ -39,3 +39,18 @@ def test_post_creates(address, alias, client: APIClient):
     assert response.status_code == 201
     assert response.json()["address"] == address
     assert response.json()["alias"] == alias
+
+
+@pytest.mark.django_db
+def test_post_second_time(client: APIClient):
+    address = "https://szkolawchmurze.org/"
+    data = {"address": address}
+
+    _ = client.post("/", data)
+    _ = client.post("/", data)
+    response = client.post("/", data)
+
+    assert response.status_code == 200
+    assert response.json()["address"] == address
+    assert response.json()["alias"] == shorten(address)
+    assert len(Url.objects.all()) == 1
