@@ -41,18 +41,13 @@ curl -X POST "http://localhost:8000/" \
 Response:
 
 ```json
-{ "id": 234, "address": "<some_long_url>", "alias": "<alias>" }
+{ "id": "<short_id>", "address": "<some_long_url>" }
 ```
 
-Then, you can verify the redirection works by visiting `http://localhost:8000/<alias>`.
+Then, you can verify the redirection works by visiting `http://localhost:8000/<short_id>`.
 
 ## Testing
 
 ```sh
 uv run manage.py test
 ```
-
-## TODO
-
-- [x] URL validation + tests
-- [ ] Collision prevention (CRC32)

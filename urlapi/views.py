@@ -8,13 +8,15 @@ from rest_framework.status import (
 )
 from rest_framework.views import APIView
 
+from urlapi.id_converter import decode_id
 from urlapi.models import Url
 from urlapi.serializers import UrlSerializer
 
 
 class UrlView(APIView):
     def get(self, _, short_url: str) -> HttpResponse:
-        url = get_object_or_404(Url, alias=short_url)
+        decoded_id = decode_id(short_url)
+        url = get_object_or_404(Url, id=decoded_id)
         return HttpResponseRedirect(redirect_to=url.address)
 
     def post(self, request: Request) -> HttpResponse:
