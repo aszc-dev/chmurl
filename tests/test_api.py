@@ -54,3 +54,13 @@ def test_post_second_time(client: APIClient):
     assert response.json()["address"] == address
     assert response.json()["alias"] == shorten(address)
     assert len(Url.objects.all()) == 1
+
+
+@pytest.mark.django_db
+def test_post_fails_non_url(client: APIClient):
+    address = "not-an-actual-url"
+    data = {"address": address}
+
+    response = client.post("/", data)
+
+    assert response.status_code == 400

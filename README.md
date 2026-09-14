@@ -54,5 +54,5 @@ uv run manage.py test
 
 ## TODO
 
-- [ ] URL validation + tests
+- [x] URL validation + tests
 - [ ] Collision prevention (CRC32)
